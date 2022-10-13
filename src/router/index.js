@@ -51,7 +51,11 @@ export const constantRoutes = [
       path: 'dashboard',
       name: 'Dashboard',
       component: () => import('@/views/dashboard/index'),
-      meta: { title: '首页', icon: 'dashboard' }
+      meta: {
+        title: '首页',
+        icon: 'dashboard',
+        affix: true
+      }
     }]
   },
 
@@ -98,6 +102,46 @@ export const constantRoutes = [
         meta: { title: '车位管理', icon: 'el-icon-user' }
       }
     ]
+  },
+
+  {
+    path: '/upload',
+    component: Layout,
+    redirect: '/single',
+    name: 'upload',
+    meta: { title: '上传管理', icon: 'el-icon-s-help' },
+    alwaysShow: true,
+    children: [
+      {
+        path: 'single',
+        name: 'single',
+        component: () => import('@/views/upload/single'),
+        meta: { title: '单一文件上传', icon: 'el-icon-user' }
+      },
+      {
+        path: 'base64',
+        name: 'base64',
+        component: () => import('@/views/upload/base64'),
+        meta: { title: 'base64上传', icon: 'el-icon-user' }
+      },
+      {
+        path: 'thumbnail',
+        name: 'thumbnail',
+        component: () => import('@/views/upload/thumbnail'),
+        meta: { title: '缩略图处理', icon: 'el-icon-user' }
+      }
+    ]
+  },
+
+  {
+    path: '/redirect',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: '/redirect/:path(.*)',
+        component: () => import('@/views/redirect/index')
+      }]
   },
 
   // 404 page must be placed at the end !!!

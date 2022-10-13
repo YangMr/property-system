@@ -44,8 +44,15 @@ export default {
       this.$store.dispatch('app/toggleSideBar')
     },
     async logout() {
-      await this.$store.dispatch('user/logout')
-      this.$router.push(`/login?redirect=${this.$route.fullPath}`)
+      try {
+        const res = await this.util.confirm('确定退出登录吗?')
+        if (res) {
+          await this.$store.dispatch('user/logout')
+          this.$router.push(`/login?redirect=${this.$route.fullPath}`)
+        }
+      } catch (e) {
+        console.log(e.message)
+      }
     },
     resetPassword() {
       alert('重置密码')

@@ -28,6 +28,9 @@ if (process.env.NODE_ENV === 'production') {
   mockXHR()
 }
 
+import utilMessage from './utils/util-message'
+Vue.prototype.util = utilMessage
+
 // set ElementUI lang to EN
 Vue.use(ElementUI, { locale })
 // 如果想要中文版 element-ui，按如下方式声明

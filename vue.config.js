@@ -37,6 +37,13 @@ module.exports = {
         pathRewrite: {
           ['^' + process.env.VUE_APP_BASE_API]: ''
         }
+      },
+      '/uapi': {
+        target: 'http://upload.9yuecloud.com:8887',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/uapi': ''
+        }
       }
     }
 

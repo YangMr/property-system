@@ -1,5 +1,5 @@
 import { login, logout, getInfo } from '@/api/user'
-import { getToken, setToken, removeToken, setUserId } from '@/utils/auth'
+import { getToken, setToken, removeToken, setUserId, getUserId, removeUserId, setRoles } from '@/utils/auth'
 import { resetRouter } from '@/router'
 
 const getDefaultState = () => {
@@ -7,7 +7,9 @@ const getDefaultState = () => {
     token: getToken(),
     name: '',
     avatar: '',
-    userId: ''
+    userId: getUserId(),
+    // 权限数据
+    roles: []
   }
 }
 
@@ -28,6 +30,9 @@ const mutations = {
   },
   SET_AVATAR: (state, avatar) => {
     state.avatar = avatar
+  },
+  SET_ROLES(state, roles) {
+    state.roles = roles
   }
 }
 
@@ -59,8 +64,14 @@ const actions = {
           return reject('Verification failed, please Login again.')
         }
 
-        const { name, avatar } = data
+        const { name, avatar, roles } = data
 
+        // if (!roles && roles.length <= 0) {
+        //   reject('getInfo: 用户的权限信息必须是一个数组!')
+        // }
+        //
+        // setRoles(roles)
+        // commit('SET_ROLES', roles)
         commit('SET_NAME', name)
         commit('SET_AVATAR', avatar)
         resolve(data)
@@ -73,14 +84,20 @@ const actions = {
   // user logout
   logout({ commit, state }) {
     return new Promise((resolve, reject) => {
-      logout(state.token).then(() => {
-        removeToken() // must remove  token  first
-        resetRouter()
-        commit('RESET_STATE')
-        resolve()
-      }).catch(error => {
-        reject(error)
-      })
+      removeToken() // must remove  token  first
+      removeUserId()
+      resetRouter()
+      commit('RESET_STATE')
+      resolve()
+      // logout().then(() => {
+      //   removeToken() // must remove  token  first
+      //   removeUserId()
+      //   resetRouter()
+      //   commit('RESET_STATE')
+      //   resolve()
+      // }).catch(error => {
+      //   reject(error)
+      // })
     })
   },
 
