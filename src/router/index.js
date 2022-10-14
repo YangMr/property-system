@@ -129,6 +129,12 @@ export const constantRoutes = [
         name: 'thumbnail',
         component: () => import('@/views/upload/thumbnail'),
         meta: { title: '缩略图处理', icon: 'el-icon-user' }
+      },
+      {
+        path: 'el-upload',
+        name: 'elUpload',
+        component: () => import('@/views/upload/el-upload'),
+        meta: { title: 'el-upload', icon: 'el-icon-user' }
       }
     ]
   },

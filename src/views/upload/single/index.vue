@@ -52,7 +52,7 @@ export default {
     handleUpload() {
       // 限制上传文件的大小 (2MB) 2MB - B
       const sizes = 2 * 1024 * 1024
-      console.log(sizes)
+
       if (this.file.size > sizes) {
         this.$message.warning('您上传的文件不能超过2MB哦！')
         return

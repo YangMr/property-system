@@ -39,7 +39,8 @@ module.exports = {
         }
       },
       '/uapi': {
-        target: 'http://upload.9yuecloud.com:8887',
+        // target: 'http://upload.9yuecloud.com:8887',
+        target: 'http://disk.9yuecloud.com/dev',
         changeOrigin: true,
         pathRewrite: {
           '^/uapi': ''
