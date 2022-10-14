@@ -59,6 +59,7 @@ export default {
   name: 'Login',
   data() {
     const validateUsername = (rule, value, callback) => {
+      console.log(value)
       if (!validUsername(value)) {
         callback(new Error('Please enter the correct user name'))
       } else {
@@ -74,9 +75,9 @@ export default {
     }
     return {
       loginForm: {
-        username: 'admin',
+        username: 'yangmr',
         password: '123456',
-        userType: 0
+        userType: 1
       },
       loginRules: {
         username: [{ required: true, trigger: 'blur', validator: validateUsername }],
@@ -108,6 +109,7 @@ export default {
     },
     handleLogin() {
       this.$refs.loginForm.validate(valid => {
+        console.log(valid)
         if (valid) {
           this.loading = true
           this.$store.dispatch('user/login', this.loginForm).then(() => {

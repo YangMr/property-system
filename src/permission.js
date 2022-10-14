@@ -26,15 +26,25 @@ router.beforeEach(async(to, from, next) => {
       next({ path: '/' })
       NProgress.done()
     } else {
-      const hasGetUserInfo = store.getters.name
-      if (hasGetUserInfo) {
+      // const hasGetUserInfo = store.getters.name
+
+      const hasRoles = store.getters.roles && store.getters.roles.length > 0
+
+      if (hasRoles) {
         next()
       } else {
         try {
           // get user info
-          await store.dispatch('user/getInfo')
+          const { roles } = await store.dispatch('user/getInfo')
 
-          next()
+          // get menu and router data
+          const accessedRoutes = await store.dispatch('permission/generateRoutes', roles)
+          // 如果404 不添加到路由最后面， 就会导致页面刷新的时候跳转到404
+          const obj = { path: '*', redirect: '/404', hidden: true }
+          accessedRoutes.push(obj)
+          router.addRoutes(accessedRoutes)
+          // next 如果不指定具体要跳转的路由， 就是产生白屏问题
+          next({ ...to, replace: true })
         } catch (error) {
           // remove token and go to login page to re-login
           await store.dispatch('user/resetToken')

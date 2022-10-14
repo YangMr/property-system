@@ -59,85 +59,85 @@ export const constantRoutes = [
     }]
   },
 
-  {
-    path: '/system',
-    component: Layout,
-    redirect: '/sysUserList',
-    name: 'system',
-    meta: { title: '系统管理', icon: 'el-icon-s-help' },
-    children: [
-      {
-        path: '/sysUserList',
-        name: 'sysUserList',
-        component: () => import('@/views/system/sysUserList'),
-        meta: { title: '员工管理', icon: 'el-icon-user' }
-      },
-      {
-        path: '/sysRoleList',
-        name: 'sysRoleList',
-        component: () => import('@/views/system/sysRoleList'),
-        meta: { title: '角色管理', icon: 'el-icon-s-data' }
-      },
-      {
-        path: '/sysMenuList',
-        name: 'sysMenuList',
-        component: () => import('@/views/system/sysPermissionList'),
-        meta: { title: '权限管理', icon: 'el-icon-s-claim' }
-      }
-    ]
-  },
+  // {
+  //   path: '/system',
+  //   component: Layout,
+  //   redirect: '/sysUserList',
+  //   name: 'system',
+  //   meta: { title: '系统管理', icon: 'el-icon-s-help' },
+  //   children: [
+  //     {
+  //       path: '/sysUserList',
+  //       name: 'sysUserList',
+  //       component: () => import('@/views/system/sysUserList'),
+  //       meta: { title: '员工管理', icon: 'el-icon-user' }
+  //     },
+  //     {
+  //       path: '/sysRoleList',
+  //       name: 'sysRoleList',
+  //       component: () => import('@/views/system/sysRoleList'),
+  //       meta: { title: '角色管理', icon: 'el-icon-s-data' }
+  //     },
+  //     {
+  //       path: '/sysMenuList',
+  //       name: 'sysMenuList',
+  //       component: () => import('@/views/system/sysPermissionList'),
+  //       meta: { title: '权限管理', icon: 'el-icon-s-claim' }
+  //     }
+  //   ]
+  // },
+  //
+  // {
+  //   path: '/park',
+  //   component: Layout,
+  //   redirect: '/parkList',
+  //   name: 'park',
+  //   meta: { title: '车位管理', icon: 'el-icon-s-help' },
+  //   alwaysShow: true,
+  //   children: [
+  //     {
+  //       path: '/parkList',
+  //       name: 'parkList',
+  //       component: () => import('@/views/park/parkList'),
+  //       meta: { title: '车位管理', icon: 'el-icon-user' }
+  //     }
+  //   ]
+  // },
 
-  {
-    path: '/park',
-    component: Layout,
-    redirect: '/parkList',
-    name: 'park',
-    meta: { title: '车位管理', icon: 'el-icon-s-help' },
-    alwaysShow: true,
-    children: [
-      {
-        path: '/parkList',
-        name: 'parkList',
-        component: () => import('@/views/park/parkList'),
-        meta: { title: '车位管理', icon: 'el-icon-user' }
-      }
-    ]
-  },
-
-  {
-    path: '/upload',
-    component: Layout,
-    redirect: '/single',
-    name: 'upload',
-    meta: { title: '上传管理', icon: 'el-icon-s-help' },
-    alwaysShow: true,
-    children: [
-      {
-        path: 'single',
-        name: 'single',
-        component: () => import('@/views/upload/single'),
-        meta: { title: '单一文件上传', icon: 'el-icon-user' }
-      },
-      {
-        path: 'base64',
-        name: 'base64',
-        component: () => import('@/views/upload/base64'),
-        meta: { title: 'base64上传', icon: 'el-icon-user' }
-      },
-      {
-        path: 'thumbnail',
-        name: 'thumbnail',
-        component: () => import('@/views/upload/thumbnail'),
-        meta: { title: '缩略图处理', icon: 'el-icon-user' }
-      },
-      {
-        path: 'el-upload',
-        name: 'elUpload',
-        component: () => import('@/views/upload/el-upload'),
-        meta: { title: 'el-upload', icon: 'el-icon-user' }
-      }
-    ]
-  },
+  // {
+  //   path: '/upload',
+  //   component: Layout,
+  //   redirect: '/single',
+  //   name: 'upload',
+  //   meta: { title: '上传管理', icon: 'el-icon-s-help' },
+  //   alwaysShow: true,
+  //   children: [
+  //     {
+  //       path: 'single',
+  //       name: 'single',
+  //       component: () => import('@/views/upload/single'),
+  //       meta: { title: '单一文件上传', icon: 'el-icon-user' }
+  //     },
+  //     {
+  //       path: 'base64',
+  //       name: 'base64',
+  //       component: () => import('@/views/upload/base64'),
+  //       meta: { title: 'base64上传', icon: 'el-icon-user' }
+  //     },
+  //     {
+  //       path: 'thumbnail',
+  //       name: 'thumbnail',
+  //       component: () => import('@/views/upload/thumbnail'),
+  //       meta: { title: '缩略图处理', icon: 'el-icon-user' }
+  //     },
+  //     {
+  //       path: 'el-upload',
+  //       name: 'elUpload',
+  //       component: () => import('@/views/upload/el-upload'),
+  //       meta: { title: 'el-upload', icon: 'el-icon-user' }
+  //     }
+  //   ]
+  // },
 
   {
     path: '/redirect',
@@ -148,10 +148,10 @@ export const constantRoutes = [
         path: '/redirect/:path(.*)',
         component: () => import('@/views/redirect/index')
       }]
-  },
+  }
 
   // 404 page must be placed at the end !!!
-  { path: '*', redirect: '/404', hidden: true }
+  // { path: '*', redirect: '/404', hidden: true }
 ]
 
 const createRouter = () => new Router({

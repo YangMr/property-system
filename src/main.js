@@ -44,3 +44,12 @@ new Vue({
   store,
   render: h => h(App)
 })
+
+/**
+ *
+ * 1. 当用户登录之后， 将token存储到vuex 和 cookie
+ * 2. 当登录把token存储后，调用获取用户信息接口
+ * 3. 当用户信息接口获取成功之后， 将roles的数据存储到vuex  roles里面的数据是按钮权限的数据
+ *
+ *
+ */

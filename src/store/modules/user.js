@@ -1,5 +1,5 @@
 import { login, logout, getInfo } from '@/api/user'
-import { getToken, setToken, removeToken, setUserId, getUserId, removeUserId, setRoles } from '@/utils/auth'
+import { getToken, setToken, removeToken, setUserId, getUserId, removeUserId, setRoles, clear } from '@/utils/auth'
 import { resetRouter } from '@/router'
 
 const getDefaultState = () => {
@@ -8,8 +8,7 @@ const getDefaultState = () => {
     name: '',
     avatar: '',
     userId: getUserId(),
-    // 权限数据
-    roles: []
+    roles: [] // 保存的是按钮权限数据
   }
 }
 
@@ -59,19 +58,17 @@ const actions = {
     return new Promise((resolve, reject) => {
       getInfo(state.userId).then(response => {
         const { data } = response
-
         if (!data) {
           return reject('Verification failed, please Login again.')
         }
 
         const { name, avatar, roles } = data
 
-        // if (!roles && roles.length <= 0) {
-        //   reject('getInfo: 用户的权限信息必须是一个数组!')
-        // }
-        //
-        // setRoles(roles)
-        // commit('SET_ROLES', roles)
+        if (!roles && roles.length <= 0) {
+          reject('getInfo: 用户的权限信息必须是一个数组!')
+        }
+        setRoles(roles)
+        commit('SET_ROLES', roles)
         commit('SET_NAME', name)
         commit('SET_AVATAR', avatar)
         resolve(data)
@@ -84,20 +81,16 @@ const actions = {
   // user logout
   logout({ commit, state }) {
     return new Promise((resolve, reject) => {
-      removeToken() // must remove  token  first
-      removeUserId()
-      resetRouter()
-      commit('RESET_STATE')
-      resolve()
-      // logout().then(() => {
-      //   removeToken() // must remove  token  first
-      //   removeUserId()
-      //   resetRouter()
-      //   commit('RESET_STATE')
-      //   resolve()
-      // }).catch(error => {
-      //   reject(error)
-      // })
+      logout().then(() => {
+        removeToken() // must remove  token  first
+        removeUserId()
+        clear()
+        resetRouter()
+        commit('RESET_STATE')
+        resolve()
+      }).catch(error => {
+        reject(error)
+      })
     })
   },
 
